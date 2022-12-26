@@ -2,14 +2,50 @@ import { Fragment } from "react"
 import Footer from "../Components/Footer/Footer"
 import Header from "../Components/Header/Header"
 import { useState } from "react";
+import { useDispatch } from 'react-redux'
+import * as userActions from '../features/user.slice'
 
 function Signin() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    const [remembered, setRemembered] = useState(false);
+    const [token, setToken] = useState("");
+    const [stayLoggedIn, setStayLoggedIn] = useState(false);
+    const dispatch = useDispatch();
 
-    function onClickSignIn() {
-        fetch('https://api.npms.io/v2/search?q=react')
+    function onClickSignIn(e) {
+        e.preventDefault()
+        fetch('http://localhost:3001/api/v1/user/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                "email": username,
+                "password": password
+            })
+        })
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (data) {
+                setToken(data.body.token)
+                fetch('http://localhost:3001/api/v1/user/profile', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': 'Bearer ' + token,
+                    },
+                })
+                    .then(function (userResponse) {
+                        return userResponse.json();
+                    })
+                    .then(function (userData) {
+                        const user = [token, userData.body.email, userData.body.lastName, userData.body.firstName, stayLoggedIn]
+                        dispatch(userActions.login(user))
+                        window.location.href = '/tbd'
+                    })
+            })
+            .catch(function (error) {
+                console.log(`Il y a eu un problème avec l'opération fetch : erreur ${error} ${error.message ? error.message : ""}`)
+            })
+            
     }
 
     return (
@@ -29,10 +65,10 @@ function Signin() {
                             <input type="password" id="password" onChange={e => setPassword(e.target.value)} />
                         </div>
                         <div className="input-remember">
-                            <input type="checkbox" id="remember-me" onChange={e => setRemembered(e.target.checked)} />
+                            <input type="checkbox" id="remember-me" onChange={e => setStayLoggedIn(e.target.checked)} />
                             <label htmlFor="remember-me">Remember me</label>
                         </div>
-                        <button className="sign-in-button" onClick={() => this.onClickSignIn}>Sign In</button>
+                        <button className="sign-in-button" onClick={e => onClickSignIn(e)}>Sign In</button>
                     </form>
                 </section>
             </main>

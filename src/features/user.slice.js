@@ -6,6 +6,7 @@ const initialState = {
   firstname: "",
   token: "",
   isLogged: false,
+  stayLoggedIn: false,
 }
 
 const userSlice = createSlice({
@@ -19,6 +20,7 @@ const userSlice = createSlice({
       email: action.payload[1],
       lastname: action.payload[2],
       firstname: action.payload[3],
+      stayLoggedIn: action.payload[4],
     }),
     logout: (state) => ({
       ...state,
@@ -27,12 +29,14 @@ const userSlice = createSlice({
       email: "",
       lastname: "",
       firstname: "",
+      stayLoggedIn: false,
     }),
     update: (state, action) => ({
       ...state,
       email: action.payload[1],
       lastname: action.payload[2],
       firstname: action.payload[3],
+      stayLoggedIn: action.payload[4],
     }),
   },
 })
