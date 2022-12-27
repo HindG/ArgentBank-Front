@@ -6,7 +6,6 @@ import Header from "../Components/Header"
 
 function Dashboard() {
     const firstname = useSelector(state => state.user.firstname)
-    console.log(firstname);
     const lastname = useSelector(state => state.user.lastname)
 
     return (
