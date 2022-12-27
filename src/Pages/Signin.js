@@ -1,6 +1,6 @@
 import { Fragment } from "react"
-import Footer from "../Components/Footer/Footer"
-import Header from "../Components/Header/Header"
+import Footer from "../Components/Footer"
+import Header from "../Components/Header"
 import { useState } from "react";
 import { useDispatch } from 'react-redux'
 import * as userActions from '../features/user.slice'
@@ -33,13 +33,13 @@ function Signin() {
                         'Authorization': 'Bearer ' + token,
                     },
                 })
-                    .then(function (userResponse) {
-                        return userResponse.json();
+                    .then(function (response) {
+                        return response.json();
                     })
-                    .then(function (userData) {
-                        const user = [token, userData.body.email, userData.body.lastName, userData.body.firstName, stayLoggedIn]
+                    .then(function (data) {
+                        const user = [token, data.body.email, data.body.lastName, data.body.firstName, stayLoggedIn]
                         dispatch(userActions.login(user))
-                        window.location.href = '/tbd'
+                        window.location.href = '/dashboard'
                     })
             })
             .catch(function (error) {
@@ -51,7 +51,7 @@ function Signin() {
     return (
         <Fragment>
             <Header />
-            <main className="main bg-dark">
+            <main className="main height-468 padding-top-3 bg-dark">
                 <section className="sign-in-content">
                     <i className="fa fa-user-circle sign-in-icon"></i>
                     <h1>Sign In</h1>

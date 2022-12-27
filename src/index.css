@@ -13,14 +13,28 @@ body {
   min-height: 100vh;
 }
 
-.main {
-  display: flex;
-  height: 516px;
-  flex: 1;
+.height-468 {
+  height: 468px;
+}
+
+.height-700 {
+  height: 700px;
+}
+
+.padding-top-3 {
+  padding-top: 3rem;
+}
+
+.padding-top-21 {
+  padding-top: 21px;
 }
 
 .bg-dark {
   background-color: #12002b;
+}
+
+.margin-top-0 {
+  margin-top: 0;
 }
 
 .sr-only {
@@ -175,7 +189,6 @@ body {
   background-color: white;
   width: 300px;
   margin: 0 auto;
-  margin-top: 3rem;
   padding: 2rem;
   height: 362px;
 }

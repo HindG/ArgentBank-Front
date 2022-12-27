@@ -1,4 +1,4 @@
-import Logo from "../../img/argentBankLogo.png"
+import Logo from "../img/argentBankLogo.png"
 
 function Header() {
 
