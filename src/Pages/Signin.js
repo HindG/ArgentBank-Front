@@ -1,7 +1,6 @@
-import { Fragment, useEffect } from "react"
+import { Fragment, useEffect, useState } from "react"
 import Footer from "../Components/Footer"
 import Header from "../Components/Header"
-import { useState } from "react";
 import { useDispatch, useSelector } from 'react-redux'
 import * as userActions from '../features/user.slice'
 import { useNavigate } from 'react-router-dom'
@@ -28,15 +27,11 @@ function Signin() {
                 "password": password
             })
         })
-            .then(function (response) {
-                return response.json();
-            })
+            .then(response => response.json())
             .then((data) => getProfileData(data.body))
-
             .catch(function (error) {
                 console.log(`Il y a eu un problème avec l'opération fetch : erreur ${error} ${error.message ? error.message : ""}`)
             })
-
     }
 
     function getProfileData(data) {
@@ -63,7 +58,7 @@ function Signin() {
     return (
         <Fragment>
             <Header />
-            <main className="main height-468 padding-top-3 bg-dark">
+            <main className="main height-468 padding-top-3 bg-dark position-relative">
                 <section className="sign-in-content">
                     <i className="fa fa-user-circle sign-in-icon"></i>
                     <h1>Sign In</h1>

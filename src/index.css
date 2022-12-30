@@ -299,6 +299,46 @@ body {
   margin-right: 5px;
 }
 
+.position-relative {
+  position: relative;
+}
+
+.edit-modal {
+  width: 400px;
+  height: 235px;
+  background-color: white;
+  position: absolute;
+  top: 170px;
+  left: calc(50% - 200px);
+  border: solid 1px #038c5a;
+}
+
+.exit-modal {
+  position: absolute;
+  right: 10px;
+  top: 5px;
+  cursor: pointer;
+}
+
+.exit-modal-title {
+  margin: 20px 0;
+  font-size: 25px;
+  font-weight: 600;
+}
+
+.exit-modal-title-formdata {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  text-align: left;
+  margin: 15px auto;
+}
+
+.sign-out {
+  font-weight: bold;
+  color: #2c3e50;
+}
+
 @media (min-width: 720px) {
   .account {
     flex-direction: row;

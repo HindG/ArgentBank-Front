@@ -31,7 +31,7 @@ function Header() {
                         <i className="fa fa-user-circle"></i>
                         {firstname}
                     </a>
-                    <div className="main-nav-item" onClick={() => onClickSignOut()}>
+                    <div className="main-nav-item sign-out" onClick={() => onClickSignOut()}>
                         <i className="fa fa-sign-out"></i>
                         Sign Out
                     </div>

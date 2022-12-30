@@ -25,10 +25,8 @@ const userSlice = createSlice({
     logout: () => initialState,
     update: (state, action) => ({
       ...state,
-      email: action.payload[1],
-      lastname: action.payload[2],
-      firstname: action.payload[3],
-      stayLoggedIn: action.payload[4],
+      lastname: action.payload[0],
+      firstname: action.payload[1],
     }),
   },
 })
