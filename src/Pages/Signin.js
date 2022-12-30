@@ -1,8 +1,8 @@
-import { Fragment } from "react"
+import { Fragment, useEffect } from "react"
 import Footer from "../Components/Footer"
 import Header from "../Components/Header"
 import { useState } from "react";
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import * as userActions from '../features/user.slice'
 import { useNavigate } from 'react-router-dom'
 
@@ -10,8 +10,13 @@ function Signin() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [stayLoggedIn, setStayLoggedIn] = useState(false);
+    const isLogged = useSelector(state => state.user.isLogged)
     const dispatch = useDispatch();
     const navigate = useNavigate();
+
+    useEffect(() => {
+        isLogged && navigate("/dashboard")
+    }, [isLogged, navigate])
 
     function onClickSignIn(e) {
         e.preventDefault()
