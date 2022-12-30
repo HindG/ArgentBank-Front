@@ -22,15 +22,7 @@ const userSlice = createSlice({
       firstname: action.payload[3],
       stayLoggedIn: action.payload[4],
     }),
-    logout: (state) => ({
-      ...state,
-      isLogged: false,
-      token: "",
-      email: "",
-      lastname: "",
-      firstname: "",
-      stayLoggedIn: false,
-    }),
+    logout: () => initialState,
     update: (state, action) => ({
       ...state,
       email: action.payload[1],

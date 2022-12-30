@@ -4,13 +4,14 @@ import Header from "../Components/Header"
 import { useState } from "react";
 import { useDispatch } from 'react-redux'
 import * as userActions from '../features/user.slice'
+import { useNavigate } from 'react-router-dom'
 
 function Signin() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    const [token, setToken] = useState("");
     const [stayLoggedIn, setStayLoggedIn] = useState(false);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     function onClickSignIn(e) {
         e.preventDefault()
@@ -26,20 +27,19 @@ function Signin() {
                 return response.json();
             })
             .then(function (data) {
-                setToken(data.body.token)
                 fetch('http://localhost:3001/api/v1/user/profile', {
                     method: 'POST',
                     headers: {
-                        'Authorization': 'Bearer ' + token,
+                        'Authorization': 'Bearer ' + data.body.token,
                     },
                 })
                     .then(function (response) {
                         return response.json();
                     })
-                    .then(function (data) {
-                        const user = [token, data.body.email, data.body.lastName, data.body.firstName, stayLoggedIn]
+                    .then(function (userData) {
+                        const user = [data.body.token, userData.body.email, userData.body.lastName, userData.body.firstName, stayLoggedIn]
                         dispatch(userActions.login(user))
-                        window.location.href = '/dashboard'
+                        navigate('/dashboard')
                     })
             })
             .catch(function (error) {
