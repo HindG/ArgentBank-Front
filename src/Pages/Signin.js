@@ -26,27 +26,34 @@ function Signin() {
             .then(function (response) {
                 return response.json();
             })
-            .then(function (data) {
-                fetch('http://localhost:3001/api/v1/user/profile', {
-                    method: 'POST',
-                    headers: {
-                        'Authorization': 'Bearer ' + data.body.token,
-                    },
-                })
-                    .then(function (response) {
-                        return response.json();
-                    })
-                    .then(function (userData) {
-                        const user = [data.body.token, userData.body.email, userData.body.lastName, userData.body.firstName, stayLoggedIn]
-                        dispatch(userActions.login(user))
-                        navigate('/dashboard')
-                    })
+            .then((data) => getProfileData(data.body))
+
+            .catch(function (error) {
+                console.log(`Il y a eu un problème avec l'opération fetch : erreur ${error} ${error.message ? error.message : ""}`)
+            })
+
+    }
+
+    function getProfileData(data) {
+        fetch('http://localhost:3001/api/v1/user/profile', {
+            method: 'POST',
+            headers: {
+                'Authorization': 'Bearer ' + data.token,
+            },
+        })
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (userData) {
+                const user = [data.token, userData.body.email, userData.body.lastName, userData.body.firstName, stayLoggedIn]
+                dispatch(userActions.login(user))
+                navigate('/dashboard')
             })
             .catch(function (error) {
                 console.log(`Il y a eu un problème avec l'opération fetch : erreur ${error} ${error.message ? error.message : ""}`)
             })
-            
     }
+
 
     return (
         <Fragment>
