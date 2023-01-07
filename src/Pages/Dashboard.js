@@ -5,6 +5,7 @@ import AccountItem from "../Components/AccountItem"
 import Footer from "../Components/Footer"
 import Header from "../Components/Header"
 import { useNavigate } from 'react-router-dom'
+import EditModal from "../Components/EditModal"
 
 function Dashboard() {
     const firstname = useSelector(state => state.user.firstname)
@@ -69,21 +70,13 @@ function Dashboard() {
                     amount="184.30" />
             </main>
             {displayEditModal &&
-                <div className="edit-modal">
-                    <div className="exit-modal" onClick={() => displayHideEditModal()}>x</div>
-                    <div className="exit-modal-title">Edit Name</div>
-                    <form>
-                        <div className="exit-modal-title-formdata">
-                            <label htmlFor="first">Firstname</label>
-                            <input className="text-control" type="text" id="first" name="first" onChange={e => setInputFirstname(e.target.value)} />
-                        </div>
-                        <div className="exit-modal-title-formdata">
-                            <label htmlFor="last">Lastname</label>
-                            <input className="text-control" type="text" id="last" name="last" onChange={e => setInputLastname(e.target.value)} />
-                        </div>
-                    </form>
-                    <button className="edit-button" onClick={(e) => saveNameChange(e)}>Save</button>
-                </div>}
+                <EditModal
+                    displayHideEditModal={displayHideEditModal}
+                    setInputFirstname={setInputFirstname}
+                    setInputLastname={setInputLastname}
+                    saveNameChange={saveNameChange}
+                />
+            }
             <Footer />
         </Fragment>
     )
