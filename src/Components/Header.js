@@ -15,22 +15,30 @@ function Header() {
         navigate('/sign-in')
     }
 
+    function navigateDashboard() {
+        navigate('/dashboard')
+    }
+
+    function navigateHomePage() {
+        navigate('/')
+    }
+
     return (
         <nav className="main-nav">
-            <a className="main-nav-logo" href="./">
+            <div className="main-nav-logo" onClick={() => navigateHomePage()}>
                 <img
                     className="main-nav-logo-image"
                     src={Logo}
                     alt="Argent Bank Logo"
                 />
                 <h1 className="sr-only">Argent Bank</h1>
-            </a>
+            </div>
             {isLogged ?
                 <div className="display-flex">
-                    <a className="main-nav-item" href="./dashboard">
+                    <div className="main-nav-item" onClick={() => navigateDashboard()}>
                         <i className="fa fa-user-circle"></i>
                         {firstname}
-                    </a>
+                    </div>
                     <div className="main-nav-item sign-out" onClick={() => onClickSignOut()}>
                         <i className="fa fa-sign-out"></i>
                         Sign Out
