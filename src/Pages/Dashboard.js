@@ -28,14 +28,15 @@ function Dashboard() {
     function saveNameChange(e) {
         const user = [inputLastname, inputFirstname]
         e.preventDefault()
-        fetch('http://localhost:3001/api/v1/user/profile', {
-            method: 'PUT',
-            headers: { 'Authorization': 'Bearer ' + token },
-            body: JSON.stringify({
-                "firstName": inputFirstname,
-                "lastName": inputLastname,
+        fetch('http://localhost:3001/api/v1/user/profile',
+            {
+                method: 'PUT',
+                headers: { 'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    firstName: inputFirstname,
+                    lastName: inputLastname,
+                })
             })
-        })
             .then(function () {
                 dispatch(userActions.update(user))
                 displayHideEditModal()
