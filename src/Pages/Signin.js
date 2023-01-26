@@ -36,7 +36,7 @@ function Signin() {
 
     function getProfileData(data) {
         fetch('http://localhost:3001/api/v1/user/profile', {
-            method: 'GET',
+            method: 'POST',
             headers: {
                 'Authorization': 'Bearer ' + data.token,
             },
